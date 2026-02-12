@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم FutureSoftsPOS</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #1e3a8a; text-align: center; }
+        .client-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; margin-bottom: 30px; padding: 20px; background: #eff6ff; border-radius: 10px; }
+        input, button { padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background: #1d4ed8; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 15px; text-align: right; border-bottom: 1px solid #eee; }
+        th { background: #f8fafc; color: #64748b; }
+        .status-active { color: #10b981; font-weight: bold; }
+        .status-blocked { color: #ef4444; font-weight: bold; }
+        .delete-btn { background: #ef4444; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>لوحة تحكم تراخيص العملاء</h1>
+        
+        <div class="client-form">
+            <input type="text" id="hwid" placeholder="معرف الجهاز (HWID)">
+            <input type="text" id="name" placeholder="اسم العميل">
+            <input type="date" id="expiry" value="2025-12-31">
+            <button onclick="addClient()">إضافة/تحديث عميل</button>
+        </div>
+
+        <table id="clientsTable">
+            <thead>
+                <tr>
+                    <th>معرف الجهاز</th>
+                    <th>اسم العميل</th>
+                    <th>تاريخ الانتهاء</th>
+                    <th>الحالة</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <button onclick="exportJSON()" style="background: #059669;">نسخ بيانات JSON للرفع على GitHub</button>
+            <p style="font-size: 12px; color: #64748b; margin-top: 10px;">قم بنسخ الـ JSON ولصقه في ملف clients.json في مستودع GitHub الخاص بك</p>
+        </div>
+    </div>
+
+    <script>
+        let clients = {};
+
+        function addClient() {
+            const hwid = document.getElementById('hwid').value.trim().toUpperCase();
+            const name = document.getElementById('name').value.trim();
+            const expiry = document.getElementById('expiry').value;
+
+            if(!hwid || !name) { alert('يرجى ملء كافة البيانات'); return; }
+
+            clients[hwid] = {
+                client_name: name,
+                expiry: expiry,
+                status: 'active'
+            };
+            renderTable();
+        }
+
+        function toggleStatus(hwid) {
+            clients[hwid].status = clients[hwid].status === 'active' ? 'blocked' : 'active';
+            renderTable();
+        }
+
+        function deleteClient(hwid) {
+            if(confirm('هل أنت متأكد؟')) {
+                delete clients[hwid];
+                renderTable();
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.querySelector('#clientsTable tbody');
+            tbody.innerHTML = '';
+            for(const hwid in clients) {
+                const c = clients[hwid];
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-family: monospace;">${hwid}</td>
+                        <td>${c.client_name}</td>
+                        <td>${c.expiry}</td>
+                        <td class="status-${c.status}">${c.status === 'active' ? 'نشط' : 'محظور'}</td>
+                        <td>
+                            <button onclick="toggleStatus('${hwid}')" style="background: #64748b; font-size: 12px;">تغيير الحالة</button>
+                            <button onclick="deleteClient('${hwid}')" class="delete-btn" style="font-size: 12px;">حذف</button>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function exportJSON() {
+            const json = JSON.stringify(clients, null, 2);
+            navigator.clipboard.writeText(json);
+            alert('تم نسخ JSON! قم بلصقه في ملف clients.json على GitHub');
+        }
+    </script>
+</body>
+</html>
