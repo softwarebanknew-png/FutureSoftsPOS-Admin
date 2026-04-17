@@ -1,8 +1,12 @@
-
-  {
-    "/1SM5924/CNCMC0041A0A85/": {
-      "client_name": "softwarebank",
-      "expiry": "2027-02-28",
-      "status": "active"
-    }
+{
+  "/1SM5924/CNCMC0041A0A85/": {
+    "client_name": "softwarebank",
+    "expiry": "2027-02-28",
+    "status": "active"
+  },
+  "/1SM5924/CNCMC0041A0A86/": {
+    "client_name": "clinic",
+    "expiry": "2026-12-31",
+    "status": "active"
   }
+}
