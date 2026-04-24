@@ -10,15 +10,6 @@
   },
   "/1SM5924/CNCMC0041A0A86/": {
     "client_name": "clinic",
-    "expiry": "2026-12-31",
-  "status": "active",
-  "license_type": "lifetime",
-  "technical_support": true,
-  "support_start": "2026-01-01",
-  "support_end": "2026-12-31"
-  },
-  "/1SM5924/CNCMC0041A0A86/": {
-    "client_name": "clinic",
     "status": "active",
     "license_type": "subscription",
     "expiry": "2026-12-31",
