@@ -2,32 +2,80 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>لوحة تحكم FutureSoftsPOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>لوحة تحكم SoftwareBankClinic</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1 { color: #1e3a8a; text-align: center; }
-        .client-form { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; margin-bottom: 30px; padding: 20px; background: #eff6ff; border-radius: 10px; }
-        input, button { padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #1e3a8a; text-align: center; font-size: 1.35rem; }
+        h2 { color: #334155; font-size: 1rem; margin: 1.25rem 0 0.5rem; }
+        .client-form { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; padding: 20px; background: #eff6ff; border-radius: 10px; align-items: end; }
+        .client-form.support-row { background: #ecfdf5; grid-template-columns: auto 1fr 1fr; align-items: center; }
+        .client-form label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: #475569; }
+        .hint { font-size: 12px; color: #64748b; line-height: 1.5; background: #f8fafc; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #e2e8f0; }
+        input, button, textarea { padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        input[type="checkbox"] { width: 20px; height: 20px; }
         button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: bold; }
         button:hover { background: #1d4ed8; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 15px; text-align: right; border-bottom: 1px solid #eee; }
+        .btn-sec { background: #64748b; }
+        .btn-sec:hover { background: #475569; }
+        .btn-ok { background: #059669; }
+        .btn-ok:hover { background: #047857; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+        th, td { padding: 10px 8px; text-align: right; border-bottom: 1px solid #eee; vertical-align: middle; }
         th { background: #f8fafc; color: #64748b; }
         .status-active { color: #10b981; font-weight: bold; }
         .status-blocked { color: #ef4444; font-weight: bold; }
-        .delete-btn { background: #ef4444; padding: 5px 10px; }
+        .delete-btn { background: #ef4444; padding: 5px 8px; font-size: 11px; }
+        .mono { font-family: ui-monospace, monospace; font-size: 12px; word-break: break-all; }
+        .import-box { margin-top: 20px; }
+        .import-box textarea { width: 100%; min-height: 100px; font-family: ui-monospace, monospace; font-size: 12px; }
+        @media (max-width: 900px) {
+            .client-form { grid-template-columns: 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>لوحة تحكم تراخيص العملاء</h1>
-        
-        <div class="client-form">
-            <input type="text" id="hwid" placeholder="معرف الجهاز (HWID)">
-            <input type="text" id="name" placeholder="اسم العميل">
-            <input type="date" id="expiry" value="2025-12-31">
-            <button onclick="addClient()">إضافة/تحديث عميل</button>
+        <h1>لوحة تحكم تراخيص العملاء + الدعم الفني</h1>
+
+        <p class="hint">
+            البرنامج يقرأ الملف <strong>clients.json</strong> من:
+            <code>softwarebanknew-png/SoftwareBankClinic-Admin</code> (فرع <code>main</code>).
+            عند تفعيل عميل، عيّن <strong>بداية/نهاية الدعم الفني</strong> ليظهر له زر التحديثات ويُسمح بجلبها فقط خلال الفترة.
+            <strong>نوع الترخيص</strong> «مدى الحياة» يعني عدم الاعتماد على تاريخ بعيد لإبقاء الترخيص صالحاً؛ يبقى <strong>الدعم الفني</strong> (التحديثات) مرتبطاً بباقة الدعم وتواريخها.
+        </p>
+
+        <h2>إضافة / تحديث عميل</h2>
+        <div class="client-form" style="grid-template-columns: repeat(4, 1fr);">
+            <label>معرف الجهاز (HWID)
+                <input type="text" id="hwid" placeholder="مثال: A1B2C3..." autocomplete="off">
+            </label>
+            <label>اسم العميل
+                <input type="text" id="name" placeholder="اسم العيادة أو العميل" autocomplete="off">
+            </label>
+            <label>انتهاء الترخيص
+                <input type="date" id="expiry" value="2026-12-31">
+            </label>
+            <label>نوع الترخيص
+                <select id="license_type">
+                    <option value="subscription">اشتراك (بتاريخ انتهاء)</option>
+                    <option value="lifetime">مدى الحياة</option>
+                </select>
+            </label>
+            <button type="button" onclick="addOrUpdateClient()" style="grid-column: 1 / -1; max-width: 200px;">حفظ / تحديث</button>
+        </div>
+        <div class="client-form support-row">
+            <label style="flex-direction: row; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="technical_support">
+                <span>مشمول بـ <strong>الدعم الفني</strong> (تحديثات البرنامج من GitHub)</span>
+            </label>
+            <label>بداية الدعم الفني
+                <input type="date" id="support_start">
+            </label>
+            <label>نهاية الدعم الفني
+                <input type="date" id="support_end">
+            </label>
         </div>
 
         <table id="clientsTable">
@@ -35,7 +83,11 @@
                 <tr>
                     <th>معرف الجهاز</th>
                     <th>اسم العميل</th>
-                    <th>تاريخ الانتهاء</th>
+                    <th>انتهاء الترخيص</th>
+                    <th>نوع الترخيص</th>
+                    <th>دعم فني</th>
+                    <th>بداية الدعم</th>
+                    <th>نهاية الدعم</th>
                     <th>الحالة</th>
                     <th>إجراءات</th>
                 </tr>
@@ -43,28 +95,99 @@
             <tbody></tbody>
         </table>
 
-        <div style="margin-top: 30px; text-align: center;">
-            <button onclick="exportJSON()" style="background: #059669;">نسخ بيانات JSON للرفع على GitHub</button>
-            <p style="font-size: 12px; color: #64748b; margin-top: 10px;">قم بنسخ الـ JSON ولصقه في ملف clients.json في مستودع GitHub الخاص بك</p>
+        <div style="margin-top: 24px; text-align: center;">
+            <button type="button" class="btn-ok" onclick="exportJSON()">نسخ JSON للصقه في clients.json على GitHub</button>
+        </div>
+        <p style="font-size: 12px; color: #64748b; text-align: center; margin-top: 8px;">
+            انسخ المحتوى وضعه في المستودع ثم <strong>Commit</strong> حتى يصبح متاحاً على <code>raw.githubusercontent.com</code>
+        </p>
+
+        <div class="import-box">
+            <h2>استيراد JSON (اختياري)</h2>
+            <p class="hint" style="margin-bottom: 8px;">الصق هنا محتوى <code>clients.json</code> الحالي من GitHub لتحريره محلياً.</p>
+            <textarea id="importArea" placeholder='{ "HWID1": { "client_name": "...", "expiry": "...", ... } }'></textarea>
+            <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" class="btn-sec" onclick="importFromTextarea()">تحميل إلى الجدول</button>
+                <button type="button" class="btn-sec" onclick="document.getElementById('importArea').value=''">تفريغ</button>
+            </div>
         </div>
     </div>
 
     <script>
         let clients = {};
 
-        function addClient() {
+        function esc(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function getFormPayload() {
             const hwid = document.getElementById('hwid').value.trim().toUpperCase();
             const name = document.getElementById('name').value.trim();
             const expiry = document.getElementById('expiry').value;
+            const license_type = (document.getElementById('license_type').value || 'subscription');
+            const technical_support = document.getElementById('technical_support').checked;
+            const support_start = (document.getElementById('support_start').value || '').trim();
+            const support_end = (document.getElementById('support_end').value || '').trim();
 
-            if(!hwid || !name) { alert('يرجى ملء كافة البيانات'); return; }
+            if (!hwid || !name) { alert('يرجى إدخال معرف الجهاز واسم العميل'); return null; }
+            if (license_type === 'subscription' && !expiry) { alert('للاشتراك يلزم تاريخ انتهاء الترخيص.'); return null; }
+            if (technical_support && (!support_start || !support_end)) {
+                if (!confirm('مفعّل الدعم الفني دون تاريخي بداية/نهاية. سيبقى التحديث في البرنامج غير مفعّل حتى تُكمل التواريخ. Continue?')) return null;
+            }
 
-            clients[hwid] = {
-                client_name: name,
-                expiry: expiry,
-                status: 'active'
-            };
+            const rec = { client_name: name, status: 'active', license_type };
+            if (license_type === 'subscription') {
+                rec.expiry = expiry;
+            } else if (expiry) {
+                rec.expiry = expiry;
+            }
+            rec.technical_support = technical_support;
+            if (support_start) rec.support_start = support_start;
+            if (support_end) rec.support_end = support_end;
+            if (!technical_support) {
+                delete rec.support_start;
+                delete rec.support_end;
+            }
+            return { hwid, rec };
+        }
+
+        function addOrUpdateClient() {
+            const p = getFormPayload();
+            if (!p) return;
+            const prev = clients[p.hwid] || {};
+            clients[p.hwid] = Object.assign({}, prev, p.rec);
+            clearForm();
             renderTable();
+        }
+
+        function clearForm() {
+            document.getElementById('hwid').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('expiry').value = '2026-12-31';
+            document.getElementById('license_type').value = 'subscription';
+            document.getElementById('technical_support').checked = false;
+            document.getElementById('support_start').value = '';
+            document.getElementById('support_end').value = '';
+        }
+
+        function loadClientToForm(hwid) {
+            const c = clients[hwid];
+            if (!c) return;
+            document.getElementById('hwid').value = hwid;
+            document.getElementById('name').value = c.client_name || '';
+            document.getElementById('expiry').value = (c.expiry || '').slice(0, 10);
+            {
+                const t = (c.license_type == null ? '' : String(c.license_type)).toLowerCase();
+                document.getElementById('license_type').value = (t === 'lifetime' || t === 'perpetual') ? 'lifetime' : 'subscription';
+            }
+            document.getElementById('technical_support').checked = c.technical_support === true;
+            document.getElementById('support_start').value = (c.support_start || '').slice(0, 10);
+            document.getElementById('support_end').value = (c.support_end || '').slice(0, 10);
+            window.scrollTo(0, 0);
         }
 
         function toggleStatus(hwid) {
@@ -73,7 +196,7 @@
         }
 
         function deleteClient(hwid) {
-            if(confirm('هل أنت متأكد؟')) {
+            if (confirm('حذف هذا العميل من القائمة المحلية؟')) {
                 delete clients[hwid];
                 renderTable();
             }
@@ -82,28 +205,80 @@
         function renderTable() {
             const tbody = document.querySelector('#clientsTable tbody');
             tbody.innerHTML = '';
-            for(const hwid in clients) {
+            for (const hwid in clients) {
                 const c = clients[hwid];
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="font-family: monospace;">${hwid}</td>
-                        <td>${c.client_name}</td>
-                        <td>${c.expiry}</td>
-                        <td class="status-${c.status}">${c.status === 'active' ? 'نشط' : 'محظور'}</td>
-                        <td>
-                            <button onclick="toggleStatus('${hwid}')" style="background: #64748b; font-size: 12px;">تغيير الحالة</button>
-                            <button onclick="deleteClient('${hwid}')" class="delete-btn" style="font-size: 12px;">حذف</button>
-                        </td>
-                    </tr>
+                const sup = c.technical_support === true;
+                const ds = c.support_start != null && String(c.support_start).trim() ? String(c.support_start) : '—';
+                const de = c.support_end != null && String(c.support_end).trim() ? String(c.support_end) : '—';
+                const st = (c.status === 'active') ? 'active' : 'blocked';
+                const lt = (c.license_type == null ? 'subscription' : String(c.license_type)).toLowerCase();
+                const licTypeLabel = (lt === 'lifetime' || lt === 'perpetual') ? 'مدى الحياة' : 'اشتراك';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="mono"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="status-${st}"></td>
+                    <td>
+                        <button type="button" class="btn-sec" style="font-size:11px;padding:4px 8px;margin-left:4px;" data-act="edit" data-hwid="">تعديل</button>
+                        <button type="button" style="background:#64748b;font-size:11px;padding:4px 8px;margin-left:4px;" data-act="toggle" data-hwid="">تغيير الحالة</button>
+                        <button type="button" class="delete-btn" style="font-size:11px;margin-left:4px;" data-act="del" data-hwid="">حذف</button>
+                    </td>
                 `;
+                tr.querySelector('.mono').textContent = hwid;
+                tr.cells[1].textContent = c.client_name || '';
+                tr.cells[2].textContent = c.expiry || '—';
+                tr.cells[3].textContent = licTypeLabel;
+                tr.cells[4].textContent = sup ? 'نعم' : 'لا';
+                tr.cells[5].textContent = ds;
+                tr.cells[6].textContent = de;
+                tr.cells[7].textContent = c.status === 'active' ? 'نشط' : 'محظور';
+                tr.querySelectorAll('button[data-hwid]').forEach((b) => { b.setAttribute('data-hwid', hwid); });
+                tbody.appendChild(tr);
             }
         }
 
+        document.querySelector('#clientsTable tbody').addEventListener('click', (e) => {
+            const b = e.target.closest('button[data-act]');
+            if (!b) return;
+            const hwid = b.getAttribute('data-hwid');
+            if (!hwid || !clients[hwid]) return;
+            const act = b.getAttribute('data-act');
+            if (act === 'edit') loadClientToForm(hwid);
+            else if (act === 'toggle') toggleStatus(hwid);
+            else if (act === 'del') deleteClient(hwid);
+        });
+
         function exportJSON() {
+            if (Object.keys(clients).length === 0) {
+                alert('لا يوجد عملاء في الجدول.');
+                return;
+            }
             const json = JSON.stringify(clients, null, 2);
-            navigator.clipboard.writeText(json);
-            alert('تم نسخ JSON! قم بلصقه في ملف clients.json على GitHub');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(json);
+                alert('تم نسخ JSON إلى الحافظة.\nالصق الملف clients.json في مستودع SoftwareBankClinic-Admin ثم ادفع (Push).');
+            } else {
+                prompt('انسخ الـ JSON يدوياً:', json);
+            }
+        }
+
+        function importFromTextarea() {
+            const raw = document.getElementById('importArea').value.trim();
+            if (!raw) { alert('الصق JSON أولاً'); return; }
+            let obj;
+            try { obj = JSON.parse(raw); } catch (e) { alert('JSON غير صالح: ' + e.message); return; }
+            if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+                alert('يجب أن يكون الملف عبارة عن object بمفاتيح HWID');
+                return;
+            }
+            clients = obj;
+            renderTable();
+            alert('تم تحميل ' + Object.keys(clients).length + ' عميل.');
         }
     </script>
-</body>
 </html>
