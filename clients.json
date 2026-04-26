@@ -1,5 +1,5 @@
 {
-  "/1SM5924/CNCMC0041A0A86/": {
+  "1SM5924/CNCMC0041A0A86": {
     "client_name": "clinic",
     "status": "active",
     "license_type": "subscription",
@@ -8,7 +8,7 @@
     "support_start": "2026-01-01",
     "support_end": "2026-03-31"
   },
-  "/1SM5924/CNCMC0041A0A85/": {
+  "1SM5924/CNCMC0041A0A85": {
     "client_name": "softwarebank-Clinic",
     "status": "active",
     "license_type": "lifetime",
