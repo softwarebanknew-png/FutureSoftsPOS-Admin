@@ -2,7 +2,7 @@
   "/1SM5924/CNCMC0041A0A85/": {
     "client_name": "softwarebank",
     "status": "active",
-    "license_type": "subscription",
+    "license_type": "lifetime",
     "expiry": "2026-04-27",
     "technical_support": true,
     "support_start": "2026-01-01",
