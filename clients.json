@@ -7,5 +7,14 @@
     "support_start": "2026-01-01",
     "support_end": "2026-12-11",
     "notes": "test"
+  },
+    "PHWBNB21WDMRJ5": {
+    "client_name": "fathykhlatab",
+    "status": "active",
+    "license_type": "lifetime",
+    "technical_support": true,
+    "support_start": "2026-01-01",
+    "support_end": "2026-12-31",
+    "notes": "test"
   }
 }
