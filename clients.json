@@ -16,5 +16,28 @@
     "support_start": "2026-01-01",
     "support_end": "2026-12-31",
     "notes": "test"
-  }
+  },
+    "super_owner_accounts": [
+    {
+      "username": "softwarebank",
+      "email": "softwarebanknew@gmail.com",
+      "passwordHash": "$2b$10$...",
+      "totpSecret": "BASE32SECRET",
+      "is_active": true
+    },
+    {
+      "username": "support_backup_1",
+      "email": "ahmed2023g2023@gmail.com",
+      "passwordHash": "$2b$10$...",
+      "totpSecret": "BASE32SECRET2",
+      "is_active": true
+    },
+    {
+      "username": "support_backup_2",
+      "email": "softwarebank2019@gmail.com",
+      "passwordHash": "$2b$10$...",
+      "totpSecret": "BASE32SECRET3",
+      "is_active": true
+    }
+  ]
 }
