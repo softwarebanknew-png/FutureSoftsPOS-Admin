@@ -17,26 +17,26 @@
     "support_end": "2026-12-31",
     "notes": "test"
   },
-      "super_owner_accounts": [
+  "super_owner_accounts": [
     {
       "username": "softwarebank",
       "email": "softwarebanknew@gmail.com",
-      "passwordHash": "$2a$10$vJnzoUVWr4PjtVV8xau0rOGnUnQzKCRt8RyzYtxcMtDq1EHQ8m6I6",
-      "totpSecret": "KRYQWNAZOGT4UGSBA6GLOERUPSJGJAKV",
+      "passwordHash": "$2a$10$dOZ5SwTdU7WnLkLJ4XIfwOPdBpAr6RoFpjNzqoa5xsnQrr4ydnmXC",
+      "totpSecret": "ZXKFBW6FPOYTOJLWOSU7ZZKJ74MHN367",
       "is_active": true
     },
     {
-      "username": "support_backup_1",
+      "username": "softwarebank",
       "email": "ahmed2023g2023@gmail.com",
-      "passwordHash": "$2a$10$T1SjKQipToRzfp93BFkHdO0rLSkOuUFiNOcfdzgrkK15JVlAXHrYi",
-      "totpSecret": "O7UTWJKSCFJPGW2RAWZ5E6OTKUHHCYQB",
+      "passwordHash": "$2a$10$NOYlbrvzSufC6as9bq1coev5keXGZ.ibd1.gRx9F2xATxY4Iqv8z2",
+      "totpSecret": "ZE462PWKE64JQSQHMOVS7VQAMXD2C3MZ",
       "is_active": true
     },
     {
-      "username": "support_backup_2",
+      "username": "softwarebank",
       "email": "softwarebank2019@gmail.com",
-      "passwordHash": "$2a$10$UWB1WkOh/5TSl.mpR2l68OEWSZE370iSAKq42QFKElH405nz8Qvrm",
-      "totpSecret": "LHT2M3FQED64C3NS4Q47676HLRXJDNNA",
+      "passwordHash": "$2a$10$0NXoVDzRQ2w/VXDmDN/KHenLI3L6m6lwTSSKD8lWaDDnOWmGVJoSm",
+      "totpSecret": "OYTREPX5SSCKVYSBJS7VE2KT5KR6SQZ5",
       "is_active": true
     }
   ]
