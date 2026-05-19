@@ -1,49 +1,55 @@
 {
-  "/1SM5924/CNCMC0041A0A85/": {
-    "client_name": "softwarebank",
-    "status": "active",
-    "license_type": "lifetime",
-    "technical_support": true,
-    "support_start": "2026-01-01",
-    "support_end": "2026-12-11",
-    "notes": "test"
-  },
+  "licenses": {
+    "1SM5924_CNCMC0041A0A85": {
+      "client_name": "softwarebank",
+      "status": "active",
+      "license_type": "lifetime",
+      "technical_support": true,
+      "support_start": "2026-01-01",
+      "support_end": "2026-12-11",
+      "notes": "test"
+    },
+
     "LC51NRCX00DJREMB": {
-    "client_name": "MohamedSoryia",
-    "status": "active",
-    "license_type": "lifetime",
-    "technical_support": true,
-    "support_start": "2026-01-01",
-    "support_end": "2026-12-31",
-    "notes": "Markiting"
-  },
-      "PHWBNB21WDMRJ5": {
-    "client_name": "fathykhlatab",
-    "status": "active",
-    "license_type": "lifetime",
-    "technical_support": true,
-    "support_start": "2026-01-01",
-    "support_end": "2026-12-31",
-    "notes": "test"
+      "client_name": "MohamedSoryia",
+      "status": "active",
+      "license_type": "lifetime",
+      "technical_support": true,
+      "support_start": "2026-01-01",
+      "support_end": "2026-12-31",
+      "notes": "Marketing"
+    },
+
+    "PHWBNB21WDMRJ5": {
+      "client_name": "fathykhlatab",
+      "status": "active",
+      "license_type": "lifetime",
+      "technical_support": true,
+      "support_start": "2026-01-01",
+      "support_end": "2026-12-31",
+      "notes": "test"
     }
   },
+
   "super_owner_accounts": [
     {
-      "username": "softwarebank",
+      "username": "softwarebank_admin1",
       "email": "softwarebanknew@gmail.com",
       "passwordHash": "$2a$10$dOZ5SwTdU7WnLkLJ4XIfwOPdBpAr6RoFpjNzqoa5xsnQrr4ydnmXC",
       "totpSecret": "ZXKFBW6FPOYTOJLWOSU7ZZKJ74MHN367",
       "is_active": true
     },
+
     {
-      "username": "softwarebank",
+      "username": "softwarebank_admin2",
       "email": "ahmed2023g2023@gmail.com",
       "passwordHash": "$2a$10$NOYlbrvzSufC6as9bq1coev5keXGZ.ibd1.gRx9F2xATxY4Iqv8z2",
       "totpSecret": "ZE462PWKE64JQSQHMOVS7VQAMXD2C3MZ",
       "is_active": true
     },
+
     {
-      "username": "softwarebank",
+      "username": "softwarebank_admin3",
       "email": "softwarebank2019@gmail.com",
       "passwordHash": "$2a$10$0NXoVDzRQ2w/VXDmDN/KHenLI3L6m6lwTSSKD8lWaDDnOWmGVJoSm",
       "totpSecret": "OYTREPX5SSCKVYSBJS7VE2KT5KR6SQZ5",
