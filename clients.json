@@ -1,4 +1,5 @@
 {
+  "licenses": {
     "1SM5924_CNCMC0041A0A85": {
       "client_name": "softwarebank",
       "status": "active",
@@ -9,7 +10,7 @@
       "notes": "test"
     },
 
-    "LC51NRCX00DJREMB": {
+    "S3Y9NB0K308941R": {
       "client_name": "MohamedSoryia",
       "status": "active",
       "license_type": "lifetime",
@@ -28,5 +29,28 @@
       "support_end": "2026-12-31",
       "notes": "test"
     }
-  }
-
+  },
+      "super_owner_accounts": [
+    {
+      "username": "softwarebank",
+      "email": "softwarebanknew@gmail.com",
+      "passwordHash": "$2a$10$ch9N3LApPNt9LKstl9uf2e7SpwR.ghiF95WyZK85Pvh5FmoEhxjPm",
+      "totpSecret": "C6LGQOSXJA37RE2UCFSYWOTMIC4LP4DW",
+      "is_active": true
+    },
+    {
+      "username": "support_backup_1",
+      "email": "ahmed2023g2023@gmail.com",
+      "passwordHash": "$2a$10$Y1LKkLfzlYGlxxCQy3Dz6efkI9GNbySp97ZWUK9FGhwbzYwZV/8BW",
+      "totpSecret": "L6SL7MI2KG7N6UNNR6QJ4TUFZVLKFMXR",
+      "is_active": true
+    },
+    {
+      "username": "support_backup_2",
+      "email": "softwarebank2019@gmail.com",
+      "passwordHash": "$2a$10$atFjiq571NQ0NeBDDGl9NuS2HyM0cP0mXCTKDTo/Y267EWhxhv2qO",
+      "totpSecret": "7CPEFPH52YNURVOFYBBBICN5ZIUAFAGT",
+      "is_active": true
+    }
+  ]
+}
